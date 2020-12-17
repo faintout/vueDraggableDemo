@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>vue.draggable-demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <script src="http://www.itxst.com/package/vue/vue.min.js"></script>
+    <script src="http://www.itxst.com/package/sortable/Sortable.min.js"></script>
+    <script src="http://www.itxst.com/package/vuedraggable/vuedraggable.umd.min.js"></script>
+    <style scoped>
+        .item {
+            width: 50px;
+            height: 50px;
+            padding: 6px;
+            background-color: #fdfdfd;
+            border: solid 1px #eee;
+            cursor: move;
+            display: inline-block;
+            margin: 10px;
+            box-sizing: border-box;
+        }
+
+        #app {
+            position: relative;
+            left: 90%;
+            transform: translate(-50%, 0);
+        }
+
+        .item:hover {
+            background-color: #f1f1f1;
+            cursor: move;
+        }
+
+        .chosen {
+            box-sizing: border-box;
+            border: dashed 2px #3089dc !important;
+        }
+    </style>
+</head>
+
+<body style="padding:10px;">
+    <div id="app">
+        <draggable v-model="myArray" ghost-class="chosen" animation="500">
+            <div class="item" v-for="item in myArray" :key="item.id">{{item.name}}</div>
+        </draggable>
+    </div>
+    <script>
+        // 全局注册组件
+        Vue.component('vuedraggable', window.vuedraggable)
+        var app = new Vue({
+            el: '#app',
+            components: {
+                vuedraggable: window.vuedraggable, //当前页面注册组件
+            },
+            data() {
+                return {
+                    myArray: [
+                        { id: 1, name: "张红" },
+                        { id: 2, name: "王海" },
+                        { id: 3, name: "小四" },
+                        { id: 4, name: "薇薇" }
+                    ]
+                };
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>
